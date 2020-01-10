@@ -1,4 +1,8 @@
-// ESP-GPIO
+// STM32-GPIO
+// Usage and other documentation can be found here:
+//    https://github.com/wooni005/stm32_gpio
+// 2020-01-10 Arjan Wooning
+
 #include <EEPROM.h>
 #include "Adafruit_BMP085.h"
 
@@ -28,43 +32,43 @@ const byte pinLayout[] = {
   // PC13, //On-board green led
   // PC14, //OSC32 IN
   // PC15, //OSC32 OUT
-  PA0,  //00
-  PA1,  //01
-  PA2,  //02
-  PA3,  //03
-  PA4,  //04
-  PA5,  //05
-  PA6,  //06
-  PA7,  //07
-  PB0,  //08
-  PB1,  //09
-  PB10, //10
-  PB11, //11
+  PA0,  //pinIndex: 00
+  PA1,  //pinIndex: 01
+  PA2,  //pinIndex: 02
+  PA3,  //pinIndex: 03
+  PA4,  //pinIndex: 04
+  PA5,  //pinIndex: 05
+  PA6,  //pinIndex: 06
+  PA7,  //pinIndex: 07
+  PB0,  //pinIndex: 08
+  PB1,  //pinIndex: 09
+  PB10, //pinIndex: 10
+  PB11, //pinIndex: 11
 
-  PB9,  //12
-  PB8,  //13
-  PB7,  //14: Also used for i2c-SDA
-  PB6,  //15: Also used for i2c-SCL
-  PB5,  //16
-  // PB4,  //17
+  PB9,  //pinIndex: 12
+  PB8,  //pinIndex: 13
+  PB7,  //pinIndex: 14: Also used for i2c-SDA
+  PB6,  //pinIndex: 15: Also used for i2c-SCL
+  PB5,  //pinIndex: 16
+  // PB4,  //
   // PB3, //Doesn't work: https://community.st.com/s/question/0D50X00009XkZMmSAN/stm32f103-pb3-just-doesnt-work-as-gpio
-  // PA15, //18
+  // PA15, //
 //  PA12, //Used for USB Serial
 //  PA11, //Used for USB Serial
-  PA10, //17
-  PA9,  //18
-  PA8,  //19
-  PB15, //20
-  PB14, //21
-  PB13, //22
-  PB12  //23
+  PA10, //pinIndex: 17
+  PA9,  //pinIndex: 18
+  PA8,  //pinIndex: 19
+  PB15, //pinIndex: 20
+  PB14, //pinIndex: 21
+  PB13, //pinIndex: 22
+  PB12  //pinIndex: 23
 };
 
 byte oldPinStatus[NR_OF_PINS];
 byte antiPinBounce[NR_OF_PINS];
 byte outputPin[NR_OF_PINS];
 
-// ESP-GPIO configuration
+// STM32-GPIO configuration
 typedef struct {
     byte nodeId;            // Which GPIO node id
 } GPIOconfig;
@@ -140,7 +144,7 @@ static void showString (PGM_P s) {
 }
 
 static void displayVersion () {
-    Serial.print("[ESP-GPIO.");
+    Serial.print("[STM32-GPIO.");
     Serial.print(config.nodeId, DEC);
     Serial.println(']');
 }
@@ -164,16 +168,17 @@ static void loadConfig () {
 const char helpText1[] PROGMEM =
     "\n"
     "Available commands:\n"
-    "  a           - get all I/O values\n"
-    "  <nn> i      - get input <nn>\n"
-    "  <on>,<nn> o - set output <nn> <on> (nn=pinNr 1..16, <on>=0-off/1-on)\n"
-    "  <nn> n      - set node ID (0..7)\n"
-    "  <n> l       - set activity led on/off (0: off, 1: on)\n"
-    // "  p           - get temperature and barometer\n"
-    "  d           - switch on pulldown inputs (0: INPUT, 1: INPUT_PULLDOWN)\n"
-    "  u           - switch on pullup inputs (0: INPUT, 1: INPUT_PULLUP)\n"
-    "  t           - for hardware testing check if pin is bouncing\n"
-    "  v           - display board name and board id\n"
+    "  a          - get all I/O values\n"
+    "  <nn>i      - get input <nn>\n"
+    "  <on>,<nn>o - set output <nn> <on> (nn=pinNr 1..16, <on>=0-off/1-on)\n"
+    "  <nn>n      - set node ID (0..7)\n"
+    "  <n>l       - set activity led on/off (0: off, 1: on)\n"
+    "  p          - get temperature and barometer\n"
+    "  <n>d       - switch on pulldown inputs (0: INPUT, 1: INPUT_PULLDOWN)\n"
+    "  <n>u       - switch on pullup inputs (0: INPUT, 1: INPUT_PULLUP)\n"
+    "  t          - for hardware testing check if pin is bouncing\n"
+    "  v          - display board name and board id\n"
+    "  h          - this help\n"
 ;
 
 static void showHelp () {
