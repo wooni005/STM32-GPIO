@@ -1,12 +1,12 @@
 # STM32_GPIO
 
 This project is using the STM32F103C8T6 aka Blue Pill for 24 GPIO pins and support for the BMP085 barometer/temperature sensor.
-All I/O is done via the uUSB cable, which is shown in the OS as a serial interface.
+All I/O is done via the micro-USB cable, which is shown in the OS as a serial interface.
 
 ## Programming the board
 
-I'm using the Arduino IDE with STM32duino in the board manager. No need to flash the bootloader, I'm using the original bootloader with STLink V2, no need to use the boot jumpers.
-You can find here more information about the setup here: 
+I'm using the Arduino IDE with [STM32duino](https://github.com/stm32duino/Arduino_Core_STM32) in the board manager. No need to flash the bootloader, flashing the board with STLink V2, with the STLink V2 there is no need to use the switch the boot jumpers.
+You can find here more information about the setup here:
 https://alselectro.wordpress.com/2018/11/18/stm32f103-bluepill-getting-started-with-arduino-core/
 
 ## Usage
@@ -139,3 +139,6 @@ PB13, //pinIndex: 22
 PB12  //pinIndex: 23
 ```
 
+
+
+At home I'm using some JeeNodes with a [JeeLink](https://github.com/jeelabs/jeelib/blob/master/examples/RF12/RF12demo/RF12demo.ino). The serial protocol is inspired by the [JeeLink](https://github.com/jeelabs/jeelib/blob/master/examples/RF12/RF12demo/RF12demo.ino).
