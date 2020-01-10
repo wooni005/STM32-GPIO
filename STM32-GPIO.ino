@@ -88,7 +88,7 @@ static void activityLed (byte on) {
 static void setOutput(char pinIndex, byte pinValue) {
     byte stm32pinNr = pinLayout[pinIndex];
     if (outputPin[pinIndex] == FALSE) {
-        // Serial.println("OK IO");
+        Serial.println("Init Pin %d is now output" % pinIndex);
         outputPin[pinIndex] = TRUE;
         pinMode(stm32pinNr, OUTPUT);
     }
