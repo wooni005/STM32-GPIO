@@ -16,17 +16,18 @@ Press 'h' to see the available commands:
 
 ```
 Available commands:
-a                    - get all I/O values
+a                - get all I/O values
 <nn>i            - get input <nn>
-<on>,<nn>o - set output <nn> <on> (nn=pinNr 1..16, <on>=0-off/1-on)
+<on>,<nn>o       - set output <nn> <on> (nn=pinNr 1..16, <on>=0-off/1-on)
 <nn>n            - set node ID (0..7)
 <n>l             - set activity led on/off (0: off, 1: on)
-p                    - get temperature and barometer
+p                - get temperature and barometer
 <n>d             - switch on pulldown inputs (0: INPUT, 1: INPUT_PULLDOWN)
 <n>u             - switch on pullup inputs (0: INPUT, 1: INPUT_PULLUP)
-t                    - for hardware testing check if pin is bouncing
-v                    - display board name and board id
-h                    - this help
+<on>,<off>,<n>r  - set SSR switch on/off time [1=10ms] (on=0..100, off=0..100, <n>=phase nr 1..3)
+t                - for hardware testing check if pin is bouncing
+v                - display board name and board id
+h                - this help
 ```
 
 ### Input
