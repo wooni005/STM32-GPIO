@@ -1,4 +1,4 @@
-# STM32_GPIO
+# STM32-GPIO
 
 This project is using the STM32F103C8T6 aka Blue Pill for 24 GPIO pins and support for the BMP085 barometer/temperature sensor.
 All I/O is done via the micro-USB cable, which is shown in the OS as a serial interface.
