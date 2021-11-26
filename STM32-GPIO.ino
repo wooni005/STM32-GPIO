@@ -15,7 +15,9 @@ static byte stack[10], top, sendLen, dest;
 #define FALSE 0
 #define TRUE 1
 
-#define SERIAL_BAUD 57600
+//#define SERIAL_BAUD 57600
+//25-11-2021 AW: Baudrate to 9600bd, because RPi 1 has problems receiving all pins at once when starting up
+#define SERIAL_BAUD 9600
 
 #define LED_PIN       PC13
 #define I2C_SCL_PIN   PB6
@@ -553,6 +555,10 @@ void loop()
 							Serial.print(pinName[pinLayout[pinIndex]]); //STM32 Pin name
 							Serial.print(" ");
 							Serial.println(pinStat);
+							// Delay after every status update to give the RPi-IO (RPi 1B) server time to 
+							// process the data. Otherwise there are communication errors.
+							// This 10ms delay can be removed when using it with a newer RPi 4
+							delay(10);
 						}
 					}
 				}
